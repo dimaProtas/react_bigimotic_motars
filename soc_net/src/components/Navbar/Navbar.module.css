@@ -1,0 +1,71 @@
+.nav {
+    grid-area: nav;
+    background-color: #222;
+    margin-right: 10px;
+  }
+
+.item {
+    color: white;
+    margin: 30px;
+  }
+
+.item a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+.item a:hover {
+    color: #3e8fa0;
+  }
+
+.item a.active {
+  color: gold;
+}
+
+.friends {
+  position: relative;
+  margin-top: 60px;
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+.img_friends {
+  margin-top: 10px;
+  margin-left: 20px;
+  display: flex;
+}
+
+.item img {
+  margin-right: 20px;
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+}
+
+.friendLabel {
+  position: relative;
+  margin-right: 36px;
+  margin-left: 28px;
+}
+
+.friendLabel > .sticker {
+  position: relative;
+  top: 7px;
+  right: -112px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+
+/*Подсветка выбранного меню, пока не смениться фокус*/
+/* .item a:focus {  
+  color: gold;
+}
+   */

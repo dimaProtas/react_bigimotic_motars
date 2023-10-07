@@ -1,0 +1,20 @@
+.preloader img {
+  position: relative;
+  margin-top: 15%;
+  left: 18%;
+  margin-top: 95px;
+  /* animation: preloader-rotate 2s infinite linear; */
+}
+
+.preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+
+    background: #222;
+    z-index: 1001;
+  }
+  

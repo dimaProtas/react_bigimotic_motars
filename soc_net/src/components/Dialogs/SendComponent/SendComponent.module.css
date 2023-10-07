@@ -1,0 +1,36 @@
+.send input {
+    width: 60%;
+    padding: 24px 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 58px;
+    border: 0;
+    background: #222;
+    color: #fff;
+    outline: none;
+    font-size: 15px;
+}
+
+.send button {
+    margin-top: -77px;
+    height: 66px;
+    float: right;
+    margin-right: 10%;
+    margin-bottom: 10px;
+    background-color: #222;
+    color: #fff;
+    padding: 10px 5%;
+    outline: none;
+    border: 0;
+}
+
+.errors {
+    color: red;
+    margin-left: 60px;
+}
+
+.errors input {
+    border: solid 2px red;
+}

@@ -1,0 +1,18 @@
+@keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+.ScrollIcon {
+    animation: spin 2s linear infinite;
+    text-align: center;
+    color: white;
+}
+
+.ScrollIcon:hover {
+    transform: scale(1.2); /* Увеличение на 20% */
+}

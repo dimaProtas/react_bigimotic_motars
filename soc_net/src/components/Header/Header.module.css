@@ -1,0 +1,50 @@
+.header {
+    grid-area: header;
+    background-color: #222;
+    margin-bottom: 10px;
+    display: flex;
+  }
+  
+  .header img {
+    width: 40px;
+    margin-left: 15px;
+  }
+
+  .header_text {
+    color: #fff;
+    font-size: 30px;
+    margin: 0 auto;
+    margin-top: 5px;
+  }
+
+  .login, .register {
+    float: right;
+    text-decoration: none;
+    color: white;
+    margin-top: 10px;
+    margin-right: 10px;
+    position: relative;
+  }
+
+  .login a, .register a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .login a:hover, .register a:hover {
+    color: #3e8fa0;
+    font-size: 15px;
+  }
+
+  .login button, .register button {
+    background-color: #222;
+    color: #fff;
+    outline: none;
+    border: 0;
+    font-size: 18px;
+  }
+
+  .login button:hover, .register button:hover {
+    color: red;
+    font-size: 20px;
+  }

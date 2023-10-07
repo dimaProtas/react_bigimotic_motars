@@ -1,0 +1,16 @@
+.item img {
+  margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+}
+
+.name {
+  font-size: 12px;
+}
+
+/*Подсветка выбранного меню, пока не смениться фокус*/
+/* .item a:focus {  
+  color: gold;
+}
+   */

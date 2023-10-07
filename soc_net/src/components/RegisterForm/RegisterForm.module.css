@@ -1,0 +1,51 @@
+.myForm .errors input {
+    border: solid 2px red;
+}
+
+.errors {
+    color: red;
+}
+
+.errorsServer {
+    color: red;
+}
+
+.myForm {
+    margin: 20px 100px;
+}
+
+.myForm form input, 
+.myForm form textarea, 
+.myForm form button {
+    padding: 15px 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    margin-bottom: 10px;
+    border: 0;
+    background: #222;
+    color: #fff;
+    outline: none;
+    font-size: 15px;
+    width: 70%;
+}
+
+.myForm form input[type="checkbox"] {
+    width: 5%;
+}
+
+.myForm form button {
+    cursor: pointer;
+    transition: transform 500ms ease;
+    width: 80%;
+}
+
+.myForm form button:hover {
+    transform: scale(1.1);
+}
+
+.login {
+    margin-left: 35%;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
