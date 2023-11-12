@@ -1,0 +1,16 @@
+.load_message {
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 30px;
+}
+
+.load_message {
+    transition: transform 0.3s ease-in-out;
+    /* Добавляем плавный переход для свойства transform */
+}
+
+.load_message:hover {
+    transform: rotate(360deg);
+    /* Вращение на 360 градусов при наведении */
+}

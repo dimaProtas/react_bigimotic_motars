@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { follow, setCurrentPage, setUsers, unfollow, toggelFollowingProgress, 
-    selectorUsers, getNextUsers, setShowScrollIcon } from "../../reducer/users-reduser";
+    selectorUsers, getNextUsers } from "../../reducer/users-reduser";
 import Users from '../Users/Users.jsx';
 import Preloader from "../Common/Preloader/Preloader";
 import withAuthRedirectComponent from "../../hoc/withAuthRedirectComponent";
@@ -65,10 +65,7 @@ class UsersContainer extends React.Component {
                         profile={this.props.profile}
                         getUsers={this.props.getUsers}
                         setCurrentPage={this.props.setCurrentPage}
-                        showScrollIcon={this.props.showScrollIcon} 
-                        setShowScrollIcon={this.props.setShowScrollIcon} 
                         getNextUsers={this.props.getNextUsers} 
-                        loadingNextUsers={this.props.loadingNextUsers}
             />
             </>)
     }
@@ -84,9 +81,6 @@ let mapStateToProps = (state) => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
-        showScrollIcon: state.UsersPage.showScrollIcon,
-        loadingNextUsers: state.UsersPage.loadingNextUsers,
-
     }
 }
 // Вместо сложного mapDispachToProps записали сразу в connect
@@ -124,7 +118,6 @@ export default compose (
             toggelFollowingProgress, 
             getUsers: selectorUsers,
             getNextUsers,
-            setShowScrollIcon
         })
 ) (UsersContainer)
     

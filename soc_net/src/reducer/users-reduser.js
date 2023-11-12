@@ -11,7 +11,6 @@ const SET_TOTAL_FRIENDS_COUNT = "SET_TOTAL_FRIENDS_COUNT"
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
 const RESET_USER_AUTH_DATA = "RESET_USER_AUTH_DATA"
-const SET_SHOW_SCROLL_ICON = "SET_SHOW_SCROLL_ICON"
 const SET_NEXT_USERS = "SET_NEXT_USERS"
 
 
@@ -24,8 +23,7 @@ let initialState = {
     limit: 5,
     isFetching: false,
     followingInProgress: [],
-    showScrollIcon: false,
-    loadingNextUsers: true
+    next: ''
 }
 
 const UsersReducer = (state = initialState, action) => {
@@ -35,33 +33,12 @@ const UsersReducer = (state = initialState, action) => {
         case SET_NEXT_USERS:
             // Фильтруем пользователей по id, чтобы исключить дубли
             // const filteredUsers = action.users.results.filter(user => !state.users.some(existingUser => existingUser.id === user.id));
-            if (action.nextUsers.next === null) {
-                return {
-                    ...state,
-                    users: [...state.users, ...action.nextUsers.results],
-                    showScrollIcon: false,
-                    loadingNextUsers: false,
-                };
-            }
-            
-            const urls = new URL(action.nextUsers.next);
-            const param = new URLSearchParams(urls.search);
-            const offsetNext = param.get('offset');
-
-            // const filteredFriends = action.friends.filter(friend => !state.friends.some(existingUser => existingUser.id === friend.id));
             return {
                 ...state,
-                users: [...state.users, ...action.nextUsers.results], // Добавляем новых пользователей в конец массива
-                offset: offsetNext,
-                showScrollIcon: false
-                // friends: [...state.friends, ...filteredFriends],
+                users: [...state.users, ...action.nextUsers.results],
+                next: action.nextUsers.next,
             };
-
-        case SET_SHOW_SCROLL_ICON:
-            return {
-                ...state,
-                showScrollIcon: action.isStatus,
-            }
+        
 
         case FOLLOW:
             const newFollowedUser = state.users.find(user => user.id === action.userID);
@@ -98,33 +75,14 @@ const UsersReducer = (state = initialState, action) => {
         //         users: [...action.users], //...state.users, убрал потому что дублируются пользователи
         //     }
         case SET_USERS:
-            
-            if (action.users.next === null) {
-                return {
-                    ...state,
-                    users: [...state.users, ...action.users.results],
-                    friends: [...state.friends],
-                    showScrollIcon: false,
-                    loadingNextUsers: false,
-                };
-            }
-            // Фильтруем пользователей по id, чтобы исключить дубли
-            const filteredUsers = action.users.results.filter(user => !state.users.some(existingUser => existingUser.id === user.id));
-            
-            const url = new URL(action.users.next);
-            const params = new URLSearchParams(url.search);
-            const offset = params.get('offset');
-
-
-            // const filteredFriends = action.friends.filter(friend => !state.friends.some(existingUser => existingUser.id === friend.id));
             return {
-                ...state,
-                users: [...state.users, ...filteredUsers], // Добавляем новых пользователей в конец массива
-                friends: [...state.friends],
-                offset: offset,
-                showScrollIcon: false
-                // friends: [...state.friends, ...filteredFriends],
+              ...state,
+              users: [...action.users.results],
+              friends: [...state.friends],
+              next: action.users.next,
             };
+
+            
 
         case SET_FRIENDS_UPDATE:
             const filteredFriends = action.friends.filter(friend => !state.friends.some(existingUser => existingUser.id === friend.id));
@@ -199,12 +157,14 @@ export default UsersReducer
 
 
 export const getNextUsers = () => async (dispatch, getState) => {
-    const { limit, offset } = getState().UsersPage; // Замените yourReducerName на имя вашего редьюсера
+    const { next } = getState().UsersPage; // Замените yourReducerName на имя вашего редьюсера
     // debugger;
     try {
-        const response = await userAPI.getUser(offset, limit);
-        dispatch(nextUsers(response));
-        dispatch(setShowScrollIcon(false))
+        if (next !== null) {
+            const response = await userAPI.getNextUsers(next.slice(26));
+            dispatch(nextUsers(response));
+        }
+
     } catch (error) {
         console.error("Error while loading next users:", error);
     }
@@ -212,11 +172,11 @@ export const getNextUsers = () => async (dispatch, getState) => {
 
 
 //здесь код thunk(инкапсулировали код из User.jsx b UserContainer.jsx)
-export const selectorUsers = (offset, limit) => {
+export const selectorUsers = () => {
     return async (dispatch) => {
 
         dispatch(toggelIsFetching(true))
-        const data = await userAPI.getUser(offset, limit)
+        const data = await userAPI.getUser()
         dispatch(toggelIsFetching(false));
         dispatch(setUsers(data));
         dispatch(setTotalUsersCount(data.count));
@@ -267,5 +227,4 @@ export const setTotalUsersCount = (totalUsersCount) => ({ type: SET_TOTAL_USERS_
 export const setTotalFiendsCount = (users) => ({ type: SET_TOTAL_FRIENDS_COUNT, users: users })
 export const toggelIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching })
 export const toggelFollowingProgress = (isFetching, userID) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userID })
-export const setShowScrollIcon = (isStatus) => ({type: SET_SHOW_SCROLL_ICON, isStatus: isStatus})
 export const nextUsers = (nextUsers) => ({type: SET_NEXT_USERS, nextUsers: nextUsers})

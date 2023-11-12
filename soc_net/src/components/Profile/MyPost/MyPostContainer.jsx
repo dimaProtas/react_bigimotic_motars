@@ -48,7 +48,7 @@ class MyPostContainer extends React.Component {
         authorizedUserId={this.props.authorizedUserId}
         addPost={this.props.addPost}
         postDelete={this.props.postDelete}
-        isLiked={this.props.isLiked}
+        // isLiked={this.props.isLiked}
         likeRemove={this.props.likeRemove}
         like={this.props.like}
         comments={this.props.comments}

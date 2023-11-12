@@ -1,0 +1,22 @@
+.containerTrack {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    margin: 8px;
+}
+
+.line_like {
+    display: flex;
+    align-items: flex-end;
+}
+
+.playButton {
+    background: none;
+    border: none;
+    align-items: center;
+    justify-content: center;
+}

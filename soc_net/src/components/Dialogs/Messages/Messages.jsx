@@ -2,6 +2,8 @@ import React from 'react';
 import style from './Messages.module.css'
 import { format, parseISO } from 'date-fns';
 import ruLocale from 'date-fns/locale/ru';
+// import io from 'socket.io-client';
+
 
 const MessagesUser = (props) => {
     const isSentByCurrentUser = props.sender === props.userId; // Проверяем, отправитель ли это текущий пользователь
@@ -10,6 +12,7 @@ const MessagesUser = (props) => {
 
     const parsedDate = parseISO(props.timestamp); // Преобразуем ISO 8601 строку в объект Date
     const formattedDate = format(parsedDate, 'dd MMM yyyy - HH:mm', { locale: ruLocale }); // Форматируем дату
+
 
     return (
         <div className={messageClasses}>

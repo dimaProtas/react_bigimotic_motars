@@ -23,6 +23,27 @@ instans.interceptors.request.use(config => {
     return Promise.reject(error);
 });
 
+export const musicAPI ={
+    getMusic() {
+        return instans.get(`music/track/`).then(response => {
+            return response.data
+        })
+    }
+}
+
+export const newsAPI = {
+    getNewsAll() {
+        return instans.get(`news/`).then(response => {
+            return response.data
+        })
+    },
+
+    getOlderNews(url) {
+        return instans.get(url).then(response => {
+            return response.data
+        })
+    },
+}
 
 export const messagesAPI = {
     getOlderMessages(userId, limit, offset) {
@@ -102,39 +123,47 @@ export const postAPI = {
 }
 
 const userAPI = {
-    getUser(offset=0, limit=5)  {
-        return instans.get(`users/?limit=${limit}&offset=${offset}`).then(response => {
-        // return instans.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
-        // return instans.get(`users/`).then(response => {
-            return response.data
-        })
-    },
-    
-    getFriends()  {
-        return instans.get(`friends/`).then(response => {
-        // return instans.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
-        // return instans.get(`users/`).then(response => {
-            return response.data
-        })
-    },
+  getUser() {
+    return instans.get(`users/`).then((response) => {
+      // return instans.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
+      // return instans.get(`users/`).then(response => {
+      return response.data;
+    });
+  },
 
-    follow(id) {
-        return instans.post(`follow/${id}/`)
-    },
+  getNextUsers(next) {
+    return instans.get(next).then((response) => {
+      // return instans.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
+      // return instans.get(`users/`).then(response => {
+      return response.data;
+    });
+  },
 
-    unfollow(id) {
-        return instans.delete(`unfollow/${id}/`)
-    },
+  getFriends() {
+    return instans.get(`friends/`).then((response) => {
+      // return instans.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
+      // return instans.get(`users/`).then(response => {
+      return response.data;
+    });
+  },
 
-    authMe() {
-        return instans.get(`auth/me`)
-    },
+  follow(id) {
+    return instans.post(`follow/${id}/`);
+  },
 
-    profile(userId) {
-        console.log("Old params, chenge new params profileAPI")
-        return profileAPI.profile(userId)
-    }
-} 
+  unfollow(id) {
+    return instans.delete(`unfollow/${id}/`);
+  },
+
+  authMe() {
+    return instans.get(`auth/me`);
+  },
+
+  profile(userId) {
+    console.log("Old params, chenge new params profileAPI");
+    return profileAPI.profile(userId);
+  },
+}; 
 
 export const profileAPI = {
     profile(userId) {

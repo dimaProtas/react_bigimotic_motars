@@ -5,14 +5,17 @@ import UsersReducer from '../reducer/users-reduser.js';
 import AuthReducer from '../reducer/auth-reduser.js';
 import thunkMiddleware from 'redux-thunk';
 import AppReducer from '../reducer/app-reduser.js';
+import NewsReducer from '../reducer/news-reduser.js';
+import MusicReducer from '../reducer/music-reduser.js';
 
 let redusers = combineReducers({
-    ProfilePage: ProfileReducer,
-    MessagesPage: DialogsReducer,
-    UsersPage: UsersReducer,
-    auth: AuthReducer,
-    app: AppReducer,
-
+  ProfilePage: ProfileReducer,
+  MessagesPage: DialogsReducer,
+  UsersPage: UsersReducer,
+  auth: AuthReducer,
+  app: AppReducer,
+  News: NewsReducer,
+  Music: MusicReducer,
 });
 
 

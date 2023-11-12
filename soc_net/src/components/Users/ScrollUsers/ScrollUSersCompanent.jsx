@@ -11,11 +11,9 @@ const Scroll = (props) => {
 
             scrollTimeoutRef.current = setTimeout(() => {
                 const scrolledToBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
-                if (scrolledToBottom && props.loadingNextUsers) {
+                if (scrolledToBottom) {
                     props.getNextUsers();
-                    props.setShowScrollIcon(true);
-                } else {
-                    props.setShowScrollIcon(false);
+
                 }
             }, 200);
 

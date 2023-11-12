@@ -2,7 +2,7 @@ import { messagesAPI } from "../api/api"
 
 
 // const SEND_MESSAGE = "SEND_MESSAGE"
-// const UPDATE_MESSAGE = "UPDATE_MESSAGE"
+const UPDATE_MESSAGE = "UPDATE_MESSAGE"
 const SET_MESSAGES = "SET_MESSAGES"
 const SET_OLDER_MESSAGES = "SET_OLDER_MESSAGES"
 const SET_SHOW_SCROLL_ICON = "SET_SHOW_SCROLL_ICON"
@@ -98,15 +98,13 @@ export const DialogsReducer = (state = initialState, action) => {
     //             new_message: '',
     //         }
     //     }
-    //     case UPDATE_MESSAGE: {
-    //         console.log(action.message, '----- action')
-    //         console.log(state.messages, '------ state.messages')
-    //         return {
-    //             ...state,
-    //             messages: [...state.messages, action.message],
-    //             new_message: '',
-    //         }
-    //     }
+        case UPDATE_MESSAGE: {
+            return {
+                ...state,
+                messages: [...state.messages, action.message],
+                // new_message: '',
+            }
+        }
         default:
             return state
     }
@@ -141,13 +139,11 @@ export const getOlderMessages = (userId) => async (dispatch, getState) => {
     }
 };
 
-export const sendMessage = (recipient, text, sender, currentTime) => {
+export const sendMessage = (recipient, text, sender, timestamp) => {
     return async (dispach) => {
-        const response = await messagesAPI.sendMessage(recipient, text)
-        if(response.data.resultCode === 0) {
-            // dispach(updateMessageActionCreated({sender: sender, recipient: parseInt(recipient), text: text, timestamp: currentTime}))
-            dispach(getMessagesUser(recipient))
-        }
+        dispach(updateMessageActionCreated({sender: sender, recipient: recipient, text: text, timestamp: timestamp}))
+        // dispach(getMessagesUser(recipient))
+
     }
 }
 
@@ -163,7 +159,7 @@ export default DialogsReducer
 
 //Вывод стрелочной ф-и без return возможен, если функция только возвращает обьекты, после => нужно обернуть в ()
 // export const sendMessageActionCreated = () => ({ type: SEND_MESSAGE })
-// export const updateMessageActionCreated = (message) => ({ type: UPDATE_MESSAGE, message: message})
+export const updateMessageActionCreated = (message) => ({ type: UPDATE_MESSAGE, message: message})
 export const setMessages = (messages) => ({type: SET_MESSAGES, messages: messages})
 export const olderMessages = (olderMessages) => ({type:SET_OLDER_MESSAGES, olderMessages: olderMessages})
 export const setShowScrollIcon = (isState) => ({type: SET_SHOW_SCROLL_ICON, isState: isState})

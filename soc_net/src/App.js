@@ -2,8 +2,8 @@ import React from 'react'
 import './App.css';
 import HeaderContainer from './components/Header/HeaderContainer';
 // import Navbar from './components/Navbar/Navbar';
-import News from './components/News/News';
-import Music from './components/Music/Music';
+// import News from './components/News/News';
+// import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import { Route, Routes } from "react-router-dom"
 import Login from './components/LoginForm/LoginForm.jsx';
@@ -23,6 +23,8 @@ const ProfileComponent = React.lazy(() => import('./components/Profile/ProfileCo
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
 const FriendsContainer = React.lazy(() => import('./components/Friends/FriendsContainer'))
 const NavbarContainer = React.lazy(() => import('./components/Navbar/NavbarContainer'))
+const NewsContainer = React.lazy(() => import('./components/News/NewsContainer'))
+const MusicContainer = React.lazy(() => import('./components/Music/MusicContainer'))
 
 
 class App extends React.Component {
@@ -38,24 +40,25 @@ class App extends React.Component {
     }
 
     return (
-      <div className='app-wrapper'>
-
+      <div className="app-wrapper">
         <HeaderContainer />
         {withSuspense(NavbarContainer)}
         <Routes>
-          <Route path="/profile/:userId?" element={withSuspense(ProfileComponent)} />
-          <Route path='/dialogs/' element={withSuspense(DialogsContainer)} />
-          <Route path='/dialogs/:id' element={withSuspense(DialogsContainer)} />
-          <Route path='/news' element={<News />} />
-          <Route path='/music' element={<Music />} />
-          <Route path='/settings' element={<Settings />} />
-          <Route path='/users' element={withSuspense(UsersContainer)} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/friends' element={withSuspense(FriendsContainer)} />
+          <Route
+            path="/profile/:userId?"
+            element={withSuspense(ProfileComponent)}
+          />
+          <Route path="/dialogs/" element={withSuspense(DialogsContainer)} />
+          <Route path="/dialogs/:id" element={withSuspense(DialogsContainer)} />
+          <Route path="/news" element={withSuspense(NewsContainer)} />
+          <Route path="/music" element={withSuspense(MusicContainer)} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/users" element={withSuspense(UsersContainer)} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/friends" element={withSuspense(FriendsContainer)} />
         </Routes>
-
-      </div >
+      </div>
     );
   }
 }
